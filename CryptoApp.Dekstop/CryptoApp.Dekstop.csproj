@@ -7,4 +7,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CryptoApp.Common\CryptoApp.Common.csproj" />
+    <ProjectReference Include="..\CryptoApp.Services\CryptoApp.Services.csproj" />
+  </ItemGroup>
+
 </Project>
