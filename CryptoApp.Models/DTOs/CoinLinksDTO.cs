@@ -1,9 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System.Text.Json.Serialization;
 
-namespace CryptoApp.Models.Models
+namespace CryptoApp.Models.DTOs
 {
-    public class CoinLinks
+    public class CoinLinksDTO
     {
         [JsonProperty("homepage")]
         public List<string> Homepages { get; set; }

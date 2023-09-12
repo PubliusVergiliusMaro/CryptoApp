@@ -1,9 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System.Text.Json.Serialization;
 
-namespace CryptoApp.Models.Models
+namespace CryptoApp.Models.DTOs
 {
-    public class CoinLogo
+    public class CoinLogoDTO
     {
         [JsonProperty("large")]
         public string Image { get; set; }

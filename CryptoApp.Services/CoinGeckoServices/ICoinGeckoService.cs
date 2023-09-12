@@ -1,10 +1,10 @@
-﻿using CryptoApp.Models.Models;
+﻿using CryptoApp.Models.DTOs;
 
 namespace CryptoApp.Services.CoinGeckoServices
 {
     public interface ICoinGeckoService
     {
-        Task<List<Coin>> GetAllCoinsAsync();
-        Task<Coin> GetCoinByIdAsync(string coinId);
+        Task<List<CoinDTO>> GetAllCoinsAsync();
+        Task<CoinDTO> GetCoinByIdAsync(string coinId);
     }
 }

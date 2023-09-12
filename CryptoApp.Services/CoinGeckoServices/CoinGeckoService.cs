@@ -1,22 +1,21 @@
 ﻿using CryptoApp.Common;
-using CryptoApp.Models.Models;
+using CryptoApp.Models.DTOs;
 using Newtonsoft.Json;
-using System.Text.Json.Nodes;
 
 namespace CryptoApp.Services.CoinGeckoServices
 {
     public class CoinGeckoService : ICoinGeckoService
     {
-        public async Task<List<Coin>> GetAllCoinsAsync()
+        public async Task<List<CoinDTO>> GetAllCoinsAsync()
         {
             var response = await GetDataFromEndPoint(EndPoints.COINS);
-            return JsonConvert.DeserializeObject<List<Coin>>(response);
+            return JsonConvert.DeserializeObject<List<CoinDTO>>(response);
         }
 
-        public async Task<Coin> GetCoinByIdAsync(string coinId)
+        public async Task<CoinDTO> GetCoinByIdAsync(string coinId)
         {
             var response = await GetDataFromEndPoint(EndPoints.COIN + coinId);
-            return JsonConvert.DeserializeObject<Coin>(response);
+            return JsonConvert.DeserializeObject<CoinDTO>(response);
         }
 
         public async Task<string> GetDataFromEndPoint(string url)
