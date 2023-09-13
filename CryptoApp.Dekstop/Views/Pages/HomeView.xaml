@@ -37,8 +37,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.ColumnSpan="2" FontSize="15">Enter coin Id</Label>
-                <TextBox Grid.Row="1" Grid.Column="0"></TextBox>
-                <Button Grid.Row="1" Grid.Column="1"></Button>
+                <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <Button Grid.Row="1" Grid.Column="1" Command="{Binding ClearSearchTextCommand}">Clear</Button>
             </Grid>
             
         </Grid>

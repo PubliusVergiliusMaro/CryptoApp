@@ -1,5 +1,7 @@
 ﻿using CryptoApp.Dekstop.Commands;
+using CryptoApp.Dekstop.NavigationServices;
 using CryptoApp.Models.DTOs;
+using CryptoApp.Services.CoinGeckoServices;
 using System.Windows;
 using System.Windows.Input;
 
@@ -7,11 +9,13 @@ namespace CryptoApp.Dekstop.ViewModels
 {
     public class CoinBoxViewModel : ViewModelBase
     {
-        public CoinBoxViewModel(CoinDTO coin)
+        public CoinBoxViewModel(NavigationStore navigationStore,ICoinGeckoService coinGeckoService,CoinDTO coin)
         {
             Id = coin.Id;
             Name = coin.Name;
             Symbol = coin.Symbol;
+            _navigationStore = navigationStore;
+            _coinGeckoService = coinGeckoService;
             SelectCoinCommand = new DelegateCommand(SelectCoin);
         }
         private string _id;
@@ -44,10 +48,12 @@ namespace CryptoApp.Dekstop.ViewModels
                 OnPropertyChanged(nameof(Symbol));
             }
         }
+        private readonly NavigationStore _navigationStore;
+        private readonly ICoinGeckoService _coinGeckoService;
         public ICommand SelectCoinCommand { get; }
         private void SelectCoin()
         {
-            MessageBox.Show("Test");
+            _navigationStore.CurrentViewModel = new CoinInfoViewModel(_navigationStore,_coinGeckoService,Id);
         }
     }
 }

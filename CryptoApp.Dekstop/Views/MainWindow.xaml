@@ -16,6 +16,9 @@
             <DataTemplate DataType="{x:Type vms:ConverterViewModel}">
                 <vs:ConverterView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:CoinInfoViewModel}">
+                <vs:CoinInfoView/>
+            </DataTemplate>
         </Grid.Resources>
         <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>

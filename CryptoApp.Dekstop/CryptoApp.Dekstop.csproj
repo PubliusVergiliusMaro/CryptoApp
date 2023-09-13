@@ -17,4 +17,8 @@
     <ProjectReference Include="..\CryptoApp.Services\CryptoApp.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Icons\" />
+  </ItemGroup>
+
 </Project>

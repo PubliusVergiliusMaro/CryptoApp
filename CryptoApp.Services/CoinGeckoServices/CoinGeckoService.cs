@@ -12,7 +12,7 @@ namespace CryptoApp.Services.CoinGeckoServices
         /// <returns></returns>
         public async Task<List<CoinDTO>> GetAllCoinsAsync()
         {
-            var response = await GetDataFromEndPoint(EndPoints.COINS);
+            var response = await GetDataFromEndPoint(EndPoints.COINS_COINGECKO);
             return JsonConvert.DeserializeObject<List<CoinDTO>>(response);
         }
         /// <summary>
@@ -22,7 +22,7 @@ namespace CryptoApp.Services.CoinGeckoServices
         /// <returns></returns>
         public async Task<CoinDTO> GetCoinByIdAsync(string coinId)
         {
-            var response = await GetDataFromEndPoint(EndPoints.COIN + coinId);
+            var response = await GetDataFromEndPoint(EndPoints.COIN_COINGECKO + coinId);
             return JsonConvert.DeserializeObject<CoinDTO>(response);
         }
 
