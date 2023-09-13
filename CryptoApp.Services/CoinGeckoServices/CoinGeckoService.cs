@@ -6,19 +6,27 @@ namespace CryptoApp.Services.CoinGeckoServices
 {
     public class CoinGeckoService : ICoinGeckoService
     {
+        /// <summary>
+        /// Get all coins from CoinGecko
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<CoinDTO>> GetAllCoinsAsync()
         {
             var response = await GetDataFromEndPoint(EndPoints.COINS);
             return JsonConvert.DeserializeObject<List<CoinDTO>>(response);
         }
-
+        /// <summary>
+        /// Get coin by Id from CoinGecko 
+        /// </summary>
+        /// <param name="coinId"></param>
+        /// <returns></returns>
         public async Task<CoinDTO> GetCoinByIdAsync(string coinId)
         {
             var response = await GetDataFromEndPoint(EndPoints.COIN + coinId);
             return JsonConvert.DeserializeObject<CoinDTO>(response);
         }
 
-        public async Task<string> GetDataFromEndPoint(string url)
+        private async Task<string> GetDataFromEndPoint(string url)
         {
             var httpClient = new HttpClient();
             var response = await httpClient.GetAsync(url);

@@ -8,7 +8,7 @@ namespace CryptoApp.Models.DTOs
         public string Symbol { get; set; }
         public string Name { get; set; }
         [JsonProperty("links")]
-        public CoinLinksDTO Links { get; set; }
+        public CoinLinksDTO? Links { get; set; }
         [JsonProperty("image")]
         public CoinLogoDTO? Images { get; set; }
         [JsonProperty("market_cap_rank")]

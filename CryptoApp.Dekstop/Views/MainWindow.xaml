@@ -7,11 +7,14 @@
         xmlns:vs ="clr-namespace:CryptoApp.Dekstop.Views.Pages"
         xmlns:vms ="clr-namespace:CryptoApp.Dekstop.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Width="1085" Height="768">
     <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type vms:HomeViewModel}">
                 <vs:HomeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:ConverterViewModel}">
+                <vs:ConverterView/>
             </DataTemplate>
         </Grid.Resources>
         <ContentControl Content="{Binding CurrentViewModel}"/>
