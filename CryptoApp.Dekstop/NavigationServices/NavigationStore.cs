@@ -21,6 +21,5 @@ namespace CryptoApp.Dekstop.NavigationServices
         {
             CurrentViewModelChanged?.Invoke();
         }
-
     }
 }

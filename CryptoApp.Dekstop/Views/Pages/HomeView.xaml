@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CryptoApp.Dekstop.Views.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1085">
-    <Grid Background="Bisque">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -16,7 +16,7 @@
             <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0" Background="Aqua">
+        <Grid Grid.Row="0" Grid.Column="0" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="4*"/>
@@ -42,7 +42,7 @@
             </Grid>
             
         </Grid>
-        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="RosyBrown">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ItemsControl ItemsSource="{Binding Coins,UpdateSourceTrigger=PropertyChanged}">
                     <ItemsControl.ItemsPanel>
@@ -58,16 +58,30 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="Button">
-                                                    <Border BorderThickness="1px" BorderBrush="Black">
+                                                    <Border BorderThickness="1px" BorderBrush="Black" CornerRadius="5 5 5 5">
                                                         <Grid>
                                                             <Grid.RowDefinitions>
                                                                 <RowDefinition Height="*"></RowDefinition>
                                                                 <RowDefinition Height="*"></RowDefinition>
                                                                 <RowDefinition Height="*"></RowDefinition>
                                                             </Grid.RowDefinitions>
-                                                            <TextBlock Grid.Row="0" Text="{Binding Id}" FontSize="15" TextWrapping="Wrap"/>
-                                                            <TextBlock Grid.Row="1" Text="{Binding Name}" FontSize="15" TextWrapping="Wrap"/>
-                                                            <TextBlock Grid.Row="2" Text="{Binding Symbol}" FontSize="15" TextWrapping="Wrap"/>
+                                                            <TextBlock Grid.Row="0" Text="{Binding Name}" FontSize="15" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                                                            <Grid Grid.Row="1">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <Label Grid.Column="0">Id:</Label>
+                                                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Id}" FontSize="15" TextWrapping="Wrap" />
+                                                            </Grid>
+                                                            <Grid Grid.Row="2">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <Label Grid.Column="0">Symbol:</Label>
+                                                                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Symbol}" FontSize="15" TextWrapping="Wrap"/>
+                                                            </Grid>
                                                         </Grid>
                                                     </Border>
                                                 </ControlTemplate>
@@ -81,19 +95,8 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="1" Background="Chartreuse">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="#2E333A" Margin="-1">
             
-            <Button Command="{Binding ConverterCommand}">Convertor</Button>
         </Grid>
     </Grid>
 </UserControl>
