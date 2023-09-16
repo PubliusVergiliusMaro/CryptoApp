@@ -1,8 +1,18 @@
 ﻿<Application x:Class="CryptoApp.Dekstop.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vms="clr-namespace:CryptoApp.Dekstop.ViewModels"
+             xmlns:vs="clr-namespace:CryptoApp.Dekstop.Views.Pages"
              xmlns:local="clr-namespace:CryptoApp.Dekstop">
     <Application.Resources>
-         
+        <DataTemplate DataType="{x:Type vms:HomeViewModel}">
+            <vs:HomeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:ConverterViewModel}">
+            <vs:ConverterView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:CoinInfoViewModel}">
+            <vs:CoinInfoView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>

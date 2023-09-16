@@ -49,7 +49,7 @@ namespace CryptoApp.Dekstop.ViewModels
         private void GoHome()
         {
             // TODO: Get HomeViewModel from a DI container
-            _navigationStore.CurrentViewModel = new HomeViewModel(_navigationStore); 
+            _navigationStore.NavigateTo<HomeViewModel>(); //= new HomeViewModel(_navigationStore); 
         }
     }
 }

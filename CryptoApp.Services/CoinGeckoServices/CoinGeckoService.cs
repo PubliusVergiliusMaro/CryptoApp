@@ -25,7 +25,6 @@ namespace CryptoApp.Services.CoinGeckoServices
             var response = await GetDataFromEndPoint(EndPoints.COIN_COINGECKO + coinId);
             return JsonConvert.DeserializeObject<CoinDTO>(response);
         }
-
         private async Task<string> GetDataFromEndPoint(string url)
         {
             var httpClient = new HttpClient();

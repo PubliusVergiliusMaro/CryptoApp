@@ -22,9 +22,8 @@ namespace CryptoApp.Dekstop.ViewModels
             _coinCapService = new CoinCapService(); 
             _navigationStore = navigationStore;
             Coins = new ObservableCollection<CoinBoxViewModel>();
-            ConverterCommand = new DelegateCommand(OpenConverter);
             ClearSearchTextCommand = new DelegateCommand(ClearSearchText, CanClearSearchText);
-            LoadTestData();
+            Initialize();
         }
 
         private bool CanClearSearchText() => !string.IsNullOrWhiteSpace(SearchText);
@@ -49,18 +48,12 @@ namespace CryptoApp.Dekstop.ViewModels
                 OnPropertyChanged(nameof(SearchText));
             }
         }
-        public ICommand ConverterCommand { get; }
         public ICommand ClearSearchTextCommand { get; }
-        private void OpenConverter()
-        {
-            _navigationStore.CurrentViewModel = new ConverterViewModel();
-        }
-
+      
         private List<CoinDTO> tempCoins = new List<CoinDTO>();
-        private async Task LoadTestData()
+        private async Task Initialize()
         {
             _allCoins = await _coinCapService.GetAllCoinsAsync();
-            //for (int i = 0; i<123; i++)
             foreach(CoinDTO coin in _allCoins)
                 tempCoins.Add(coin);
             SortCoins("");

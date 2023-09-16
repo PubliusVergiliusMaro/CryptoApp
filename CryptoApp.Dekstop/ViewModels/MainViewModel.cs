@@ -49,13 +49,13 @@ namespace CryptoApp.Dekstop.ViewModels
 
         private void OpenConverter()
         {
-            _navigationStore.CurrentViewModel = new ConverterViewModel();
+            _navigationStore.NavigateTo<ConverterViewModel>();//.CurrentViewModel = new ConverterViewModel();
             HomeColor = _defaultViewColor;
             ConverterColor = _activeViewColor;
         }
         private void OpenHome()
         {
-            _navigationStore.CurrentViewModel = new HomeViewModel(_navigationStore);
+            _navigationStore.NavigateTo<HomeViewModel>();// = new HomeViewModel(_navigationStore);
             HomeColor = _activeViewColor;
             ConverterColor = _defaultViewColor;
         }

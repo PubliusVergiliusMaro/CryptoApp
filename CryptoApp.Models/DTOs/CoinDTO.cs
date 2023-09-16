@@ -11,7 +11,6 @@ namespace CryptoApp.Models.DTOs
         // CoinCap
         public int? Rank { get; set; }
         public decimal? Supply { get; set; }
-        //public decimal? MaxSupply { get; set; }
         public decimal? MarketCapUsd { get; set; }
         public decimal? VolumeUsd24Hr { get; set; }
         public decimal? PriceUsd { get; set; }
