@@ -27,11 +27,19 @@ namespace CryptoApp.Services.CoinGeckoServices
         }
         private async Task<string> GetDataFromEndPoint(string url)
         {
-            var httpClient = new HttpClient();
-            var response = await httpClient.GetAsync(url);
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            return responseBody;
+            try
+            {
+                var httpClient = new HttpClient();
+                var response = await httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                return responseBody;
+            }
+            catch (System.Net.Http.HttpRequestException ex)
+            {
+                throw new System.Net.Http.HttpRequestException(ex.Message);
+            }
         }
+       
     }
 }

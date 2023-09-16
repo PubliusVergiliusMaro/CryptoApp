@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:CryptoApp.Dekstop.Views.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1085">
-    <Grid>
+
+    <Grid Background="{DynamicResource Backdrop}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -16,6 +17,71 @@
             <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
+
+        <Grid Visibility="{Binding LoadingScreen,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="5" Grid.RowSpan="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Canvas Grid.Row="0"  x:Name="LoadingAnimation" Width="40" Height="40">
+                <Ellipse x:Name="Spinner1" Width="60" Height="60" Fill="Blue">
+                    <Ellipse.RenderTransform>
+                        <RotateTransform x:Name="Rotation1" CenterX="20" CenterY="20" />
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Canvas.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                            Storyboard.TargetName="Rotation1"
+                            Storyboard.TargetProperty="Angle"
+                            From="0" To="360" Duration="0:0:1"
+                            RepeatBehavior="Forever"
+                        />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Canvas.Triggers>
+            </Canvas>
+            <Canvas Grid.Row="0" Width="40" Height="40">
+                <Ellipse x:Name="Spinner2" Width="40" Height="50" Fill="Yellow">
+                    <Ellipse.RenderTransform>
+                        <RotateTransform x:Name="Rotation2" CenterX="14" CenterY="10" />
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Canvas.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                            Storyboard.TargetName="Rotation2"
+                            Storyboard.TargetProperty="Angle"
+                            From="0" To="360" Duration="0:0:1"
+                            RepeatBehavior="Forever"
+                        />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Canvas.Triggers>
+            </Canvas>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.4*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Row="1" Grid.Column="1" FontSize="30">Loading...</TextBlock>
+            </Grid>
+        </Grid>
+
+        <!--Coin Search-->
         <Grid Grid.Row="0" Grid.Column="0" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -36,26 +102,13 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.ColumnSpan="2" FontSize="15">Enter coin Id</Label>
+                <Label Grid.Row="0" Grid.ColumnSpan="2" FontSize="15"  Foreground="{DynamicResource Text}">Enter coin Id</Label>
                 <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <Button Grid.Row="1" Grid.Column="1" Command="{Binding ClearSearchTextCommand}">Clear</Button>
+                <Button Grid.Row="1" Grid.Column="1" Command="{Binding ClearSearchTextCommand}" Background="YellowGreen">Clear</Button>
             </Grid>
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Row="1" Grid.Column="1">Sort By</Label>
-            <ComboBox Grid.Row="2" Grid.Column="1"/>
-        </Grid>
+        
+        <!--Scroll Viewer with Coins-->
         <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ItemsControl ItemsSource="{Binding Coins,UpdateSourceTrigger=PropertyChanged}">
@@ -66,35 +119,35 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button Margin="5" Width="200" Height="150" Command="{Binding SelectCoinCommand}">
+                            <Button Margin="5" Width="200" Height="150" Command="{Binding SelectCoinCommand}" Background="{DynamicResource Cart}">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="Button">
-                                                    <Border BorderThickness="1px" BorderBrush="Black" CornerRadius="5 5 5 5">
+                                                    <Border BorderThickness="1px" BorderBrush="{DynamicResource Text}" CornerRadius="5 5 5 5">
                                                         <Grid>
                                                             <Grid.RowDefinitions>
                                                                 <RowDefinition Height="*"></RowDefinition>
                                                                 <RowDefinition Height="*"></RowDefinition>
                                                                 <RowDefinition Height="*"></RowDefinition>
                                                             </Grid.RowDefinitions>
-                                                            <TextBlock Grid.Row="0" Text="{Binding Name}" FontSize="15" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                                                            <TextBlock Grid.Row="0" Foreground="{DynamicResource Text}" Text="{Binding Name}" FontSize="15" TextWrapping="Wrap" HorizontalAlignment="Center"/>
                                                             <Grid Grid.Row="1">
                                                                 <Grid.ColumnDefinitions>
                                                                     <ColumnDefinition Width="*"/>
                                                                     <ColumnDefinition Width="*"/>
                                                                 </Grid.ColumnDefinitions>
-                                                                <Label Grid.Column="0">Id:</Label>
-                                                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Id}" FontSize="15" TextWrapping="Wrap" />
+                                                                <Label Grid.Column="0"  Foreground="{DynamicResource Text}">Id:</Label>
+                                                                <TextBlock Grid.Column="1" Foreground="{DynamicResource Text}" Grid.Row="1" Text="{Binding Id}" FontSize="15" TextWrapping="Wrap" />
                                                             </Grid>
                                                             <Grid Grid.Row="2">
                                                                 <Grid.ColumnDefinitions>
                                                                     <ColumnDefinition Width="*"/>
                                                                     <ColumnDefinition Width="*"/>
                                                                 </Grid.ColumnDefinitions>
-                                                                <Label Grid.Column="0">Symbol:</Label>
-                                                                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Symbol}" FontSize="15" TextWrapping="Wrap"/>
+                                                                <Label Grid.Column="0"  Foreground="{DynamicResource Text}">Symbol:</Label>
+                                                                <TextBlock Grid.Column="1" Foreground="{DynamicResource Text}" Grid.Row="2" Text="{Binding Symbol}" FontSize="15" TextWrapping="Wrap"/>
                                                             </Grid>
                                                         </Grid>
                                                     </Border>
@@ -109,6 +162,7 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
+        <!--Footer-->
         <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="#2E333A" Margin="-1">
             
         </Grid>

@@ -14,5 +14,7 @@
         <DataTemplate DataType="{x:Type vms:CoinInfoViewModel}">
             <vs:CoinInfoView/>
         </DataTemplate>
+
+        <ResourceDictionary x:Key="light" Source="/Themes/LightTheme.xaml"/>
     </Application.Resources>
 </Application>

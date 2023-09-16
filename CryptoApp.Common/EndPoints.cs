@@ -15,5 +15,6 @@
         /// </summary>
         public const string PING_COINGECKO = @"https://api.coingecko.com/api/v3/ping";
         public const string COINS_COINCAP = @"https://api.coincap.io/v2/assets";
+        public const string COIN_COINCAP = @"https://api.coincap.io/v2/assets/";
     }
 }

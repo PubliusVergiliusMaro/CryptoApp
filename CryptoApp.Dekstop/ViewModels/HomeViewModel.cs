@@ -16,14 +16,16 @@ namespace CryptoApp.Dekstop.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
-        public HomeViewModel(NavigationStore navigationStore)
+        public HomeViewModel(NavigationService navigationStore, ICoinGeckoService coinGeckoService, ICoinCapService coinCapService)
         {
-            _coinGeckoService = new CoinGeckoService();
-            _coinCapService = new CoinCapService(); 
+            LoadingScreen = Visibility.Visible;
+            _coinGeckoService = coinGeckoService;
+            _coinCapService = coinCapService; 
             _navigationStore = navigationStore;
             Coins = new ObservableCollection<CoinBoxViewModel>();
             ClearSearchTextCommand = new DelegateCommand(ClearSearchText, CanClearSearchText);
             Initialize();
+            LoadingScreen = Visibility.Hidden;
         }
 
         private bool CanClearSearchText() => !string.IsNullOrWhiteSpace(SearchText);
@@ -34,7 +36,7 @@ namespace CryptoApp.Dekstop.ViewModels
 
         private readonly ICoinGeckoService _coinGeckoService;
         private readonly ICoinCapService _coinCapService;
-        private readonly NavigationStore _navigationStore;
+        private readonly NavigationService _navigationStore;
         public ObservableCollection<CoinBoxViewModel> Coins { get; set; }
         private IList<CoinDTO> _allCoins { get; set; }
         private string _searchText;
@@ -48,13 +50,29 @@ namespace CryptoApp.Dekstop.ViewModels
                 OnPropertyChanged(nameof(SearchText));
             }
         }
+        private Visibility _loadingScreen;
+        public Visibility LoadingScreen
+        {
+            get => _loadingScreen;
+            set
+            {
+                _loadingScreen = value;
+                OnPropertyChanged(nameof(LoadingScreen));
+            }
+        }
         public ICommand ClearSearchTextCommand { get; }
       
         private List<CoinDTO> tempCoins = new List<CoinDTO>();
         private async Task Initialize()
         {
-            _allCoins = await _coinCapService.GetAllCoinsAsync();
-            foreach(CoinDTO coin in _allCoins)
+            List<CoinDTO> coins = await _coinGeckoService.GetAllCoinsAsync();
+            _allCoins = new List<CoinDTO>();
+            for (int i = 0; i < 250; i++)
+            {
+                _allCoins.Add(coins[i]);
+            }
+            //_allCoins = await _coinCapService.GetAllCoinsAsync();
+            foreach (CoinDTO coin in _allCoins)
                 tempCoins.Add(coin);
             SortCoins("");
         }

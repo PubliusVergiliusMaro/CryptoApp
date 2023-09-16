@@ -15,14 +15,16 @@ namespace CryptoApp.Dekstop
         {
             IServiceCollection services = new ServiceCollection();
 
-            NavigationStore navigation = new NavigationStore();
+            NavigationService navigation = new NavigationService();
             MainViewModel main = new MainViewModel(navigation);
-            HomeViewModel homeView = new HomeViewModel(navigation);
+            ICoinCapService coinCapService = new CoinCapService();
+            ICoinGeckoService coinGeckoService = new CoinGeckoService();
+            HomeViewModel homeView = new HomeViewModel(navigation,coinGeckoService,coinCapService);
             navigation.CurrentViewModel = homeView;
             
-            services.AddSingleton<ICoinGeckoService,CoinGeckoService>();
-            services.AddSingleton<ICoinCapService,CoinCapService>();
-            services.AddSingleton<NavigationStore>(navigation);
+            services.AddSingleton<ICoinGeckoService>(coinGeckoService);
+            services.AddSingleton<ICoinCapService>(coinCapService);
+            services.AddSingleton<NavigationService>(navigation);
             services.AddSingleton<MainViewModel>(main);
             services.AddSingleton<HomeViewModel>(homeView);
             services.AddSingleton<MainWindow>(provider => new MainWindow()

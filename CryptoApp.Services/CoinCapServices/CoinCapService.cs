@@ -18,8 +18,13 @@ namespace CryptoApp.Services.CoinCapServices
                 throw new Exception(ex.Message);
             }
         }
-
-        private async Task<string> GetDataFromEndPoint(string url)
+        public async Task<CoinDTO> GetCoinByIdAsync(string coinId)
+        {
+            var response = await GetDataFromEndPoint(EndPoints.COIN_COINCAP + coinId);
+            var answer = JsonConvert.DeserializeObject<CoinDTOCoinCap>(response).Data;
+            return answer;
+        }
+        public async Task<string> GetDataFromEndPoint(string url)
         {
             try
             {

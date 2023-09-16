@@ -1,5 +1,6 @@
 ﻿using CryptoApp.Dekstop.Commands;
 using CryptoApp.Dekstop.NavigationServices;
+using CryptoApp.Models.DTOs;
 using CryptoApp.Services.CoinGeckoServices;
 using System;
 using System.Threading.Tasks;
@@ -9,13 +10,13 @@ namespace CryptoApp.Dekstop.ViewModels
 {
     public class CoinInfoViewModel : ViewModelBase
     {
-        public CoinInfoViewModel(NavigationStore navigationStore,ICoinGeckoService coinGeckoService,string id)
+        public CoinInfoViewModel(NavigationService navigationStore,ICoinGeckoService coinGeckoService,CoinDTO coin)
         {
-            Id = id;
+            Id = coin.Id;
+            Coin = new CoinViewModel(coin);
             _navigationStore = navigationStore;
             _coinGeckoService = coinGeckoService;
             HomeCommand = new DelegateCommand(GoHome);
-            GetCoin(id);
         }
 
         private string _id;
@@ -39,17 +40,17 @@ namespace CryptoApp.Dekstop.ViewModels
             }
         }
 
-        private NavigationStore _navigationStore;
+        private NavigationService _navigationStore;
         private ICoinGeckoService _coinGeckoService;
         public ICommand HomeCommand { get; }
-        private async Task GetCoin(string id)
-        {
-            Coin = new CoinViewModel(await _coinGeckoService.GetCoinByIdAsync(id));
-        } 
+        //private async Task GetCoin(string id)
+        //{
+        //    var coin = await _coinGeckoService.GetCoinByIdAsync(id);
+        //    Coin = new CoinViewModel(coin);
+        //} 
         private void GoHome()
         {
-            // TODO: Get HomeViewModel from a DI container
-            _navigationStore.NavigateTo<HomeViewModel>(); //= new HomeViewModel(_navigationStore); 
+            _navigationStore.NavigateTo<HomeViewModel>(); 
         }
     }
 }

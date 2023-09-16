@@ -4,7 +4,7 @@ using System;
 
 namespace CryptoApp.Dekstop.NavigationServices
 {
-    public class NavigationStore
+    public class NavigationService
     {
         private IServiceProvider _serviceProvider;
         public ViewModelBase _currentViewModel;

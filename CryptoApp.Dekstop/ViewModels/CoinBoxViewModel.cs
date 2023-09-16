@@ -2,13 +2,14 @@
 using CryptoApp.Dekstop.NavigationServices;
 using CryptoApp.Models.DTOs;
 using CryptoApp.Services.CoinGeckoServices;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CryptoApp.Dekstop.ViewModels
 {
     public class CoinBoxViewModel : ViewModelBase
     {
-        public CoinBoxViewModel(NavigationStore navigationStore, ICoinGeckoService coinGeckoService, CoinDTO coin)
+        public CoinBoxViewModel(NavigationService navigationStore, ICoinGeckoService coinGeckoService, CoinDTO coin)
         {
             Id = coin.Id;
             Name = coin.Name;
@@ -47,12 +48,13 @@ namespace CryptoApp.Dekstop.ViewModels
                 OnPropertyChanged(nameof(Symbol));
             }
         }
-        private readonly NavigationStore _navigationStore;
+        private readonly NavigationService _navigationStore;
         private readonly ICoinGeckoService _coinGeckoService;
         public ICommand SelectCoinCommand { get; }
-        private void SelectCoin()
+        private async void SelectCoin()
         {
-            _navigationStore.CurrentViewModel = new CoinInfoViewModel(_navigationStore, _coinGeckoService, Id);
+            var coin = await _coinGeckoService.GetCoinByIdAsync(Id);
+            _navigationStore.CurrentViewModel = new CoinInfoViewModel(_navigationStore, _coinGeckoService,coin);
         }
     }
 }

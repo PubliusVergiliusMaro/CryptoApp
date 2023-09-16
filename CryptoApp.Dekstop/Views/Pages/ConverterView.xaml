@@ -20,16 +20,17 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="10*"/>
             </Grid.RowDefinitions>
            
             <!--Coin Text-->
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="1" Background="AntiqueWhite">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -40,10 +41,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="1" Grid.Column="1" Content="{Binding CoinText}"></Label>
+                <TextBlock Background="AliceBlue" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" FontSize="25" Text="{Binding CoinText,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </Grid>
             <!--Coin in Usd-->
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -54,10 +55,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CoinToUsd}"></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CoinToUsd,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </Grid>
             <!--Coin change-->
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -71,7 +72,7 @@
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CoinChange}" Foreground="{Binding CoinChangeColor,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </Grid>
             <!--Coin that we convert-->
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -95,7 +96,7 @@
                 </Grid>
             </Grid>
             <!--Coin to what we convert-->
-            <Grid Grid.Row="4">
+            <Grid Grid.Row="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
