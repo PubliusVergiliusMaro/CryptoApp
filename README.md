@@ -17,7 +17,10 @@ When you click on a cryptocurrency block, a new page opens with detailed informa
 
 ### Converter
 In the navigation menu, you can access the Converter page. By default, the converter displays Bitcoin as the currency to convert from and Ethereum as the currency to convert to. The currency data for the converter is obtained from CoinCap.
-
 On this page, you can convert various cryptocurrencies and view brief information about their price changes. Enter the amount you want to convert in the provided text box, and the converted value will be displayed.
+
+### API Request Limit Warning
+Please be aware that excessive API requests may lead to rate-limiting by the API providers. If you make too many requests in a short period, you might encounter rate-limiting issues. If this happens, you may see an error message, and you will need to wait for a few minutes before you can continue using the application.
+I recommend using the application responsibly and avoid making an excessive number of requests to ensure uninterrupted use.
 
 Enjoy using CryptoApp to explore cryptocurrency information and perform conversions!
