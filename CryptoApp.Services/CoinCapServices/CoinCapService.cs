@@ -6,6 +6,7 @@ namespace CryptoApp.Services.CoinCapServices
 {
     public class CoinCapService : ICoinCapService
     {
+        public event EventHandler<string> ErrorOccurred;
         public async Task<List<CoinDTO>> GetAllCoinsAsync()
         {
             try
@@ -24,7 +25,7 @@ namespace CryptoApp.Services.CoinCapServices
             var answer = JsonConvert.DeserializeObject<CoinDTOCoinCap>(response).Data;
             return answer;
         }
-        public async Task<string> GetDataFromEndPoint(string url)
+        private async Task<string> GetDataFromEndPoint(string url)
         {
             try
             {
@@ -34,9 +35,10 @@ namespace CryptoApp.Services.CoinCapServices
                 string responseBody = await response.Content.ReadAsStringAsync();
                 return responseBody;
             }
-            catch (Exception ex)
+            catch (System.Net.Http.HttpRequestException ex)
             {
-                throw new Exception(ex.Message);
+                ErrorOccurred?.Invoke(this, ex.Message);
+                return null;
             }
         }
     }

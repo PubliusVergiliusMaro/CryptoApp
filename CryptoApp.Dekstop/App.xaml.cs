@@ -19,6 +19,11 @@ namespace CryptoApp.Dekstop
             MainViewModel main = new MainViewModel(navigation);
             ICoinCapService coinCapService = new CoinCapService();
             ICoinGeckoService coinGeckoService = new CoinGeckoService();
+            coinGeckoService.ErrorOccurred += (sender, errorMessage) =>
+            {
+                // Display a message box with the error message.
+                MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            };
             HomeViewModel homeView = new HomeViewModel(navigation,coinGeckoService,coinCapService);
             navigation.CurrentViewModel = homeView;
             

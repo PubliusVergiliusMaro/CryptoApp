@@ -6,6 +6,7 @@ namespace CryptoApp.Services.CoinGeckoServices
 {
     public class CoinGeckoService : ICoinGeckoService
     {
+        public event EventHandler<string> ErrorOccurred;
         /// <summary>
         /// Get all coins from CoinGecko
         /// </summary>
@@ -37,9 +38,9 @@ namespace CryptoApp.Services.CoinGeckoServices
             }
             catch (System.Net.Http.HttpRequestException ex)
             {
-                throw new System.Net.Http.HttpRequestException(ex.Message);
+                ErrorOccurred?.Invoke(this,ex.Message);
+                return null;
             }
         }
-       
     }
 }

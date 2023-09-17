@@ -4,4 +4,5 @@
     <SolidColorBrush Color="#1c1b21" x:Key="Backdrop"/>
     <SolidColorBrush Color="#dfe6e9" x:Key="Text"/>
     <SolidColorBrush Color="#353b48" x:Key="Cart"/>
+    <SolidColorBrush Color="YellowGreen" x:Key="Button"/>
 </ResourceDictionary>

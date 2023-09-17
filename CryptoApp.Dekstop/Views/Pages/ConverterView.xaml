@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CryptoApp.Dekstop.Views.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Background="{DynamicResource Backdrop}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10*"/>
@@ -18,19 +18,20 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.Column="1" Background="{DynamicResource Backdrop}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="10*"/>
             </Grid.RowDefinitions>
            
             <!--Coin Text-->
-            <Grid Grid.Row="1" Background="AntiqueWhite">
+            <Grid Grid.Row="1" Background="{DynamicResource Backdrop}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -41,7 +42,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Background="AliceBlue" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" FontSize="25" Text="{Binding CoinText,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBlock Foreground="{DynamicResource Text}" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" FontSize="35" Text="{Binding CoinText,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </Grid>
             <!--Coin in Usd-->
             <Grid Grid.Row="2">
@@ -55,7 +56,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CoinToUsd,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBlock Foreground="{DynamicResource Text}" Grid.Row="1" Grid.Column="1" FontSize="20" TextWrapping="Wrap" Text="{Binding CoinToUsd,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </Grid>
             <!--Coin change-->
             <Grid Grid.Row="3">
@@ -69,13 +70,13 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CoinChange}" Foreground="{Binding CoinChangeColor,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CoinChange}" FontSize="20" TextWrapping="Wrap" Foreground="{Binding CoinChangeColor,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </Grid>
             <!--Coin that we convert-->
             <Grid Grid.Row="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -89,17 +90,21 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" 
+                             Grid.Row="1"
+                             FontSize="14"
                              Text="{Binding ConvertFromNumber,UpdateSourceTrigger=PropertyChanged}"></TextBox>
                     <ComboBox Grid.Column="1" 
+                              Grid.Row="1"
+                              FontSize="20"
                               ItemsSource="{Binding ConvertFromCurrencies,UpdateSourceTrigger=PropertyChanged}"
                               SelectedItem="{Binding ConvertFromCurrency,UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
             </Grid>
             <!--Coin to what we convert-->
-            <Grid Grid.Row="5">
+            <Grid Grid.Row="6">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -112,9 +117,9 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" 
+                    <TextBox Grid.Column="0" Grid.Row="1" FontSize="14"
                              Text="{Binding ConvertToNumber,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                    <ComboBox Grid.Column="1" 
+                    <ComboBox Grid.Column="1" Grid.Row="1" FontSize="20"
                               ItemsSource="{Binding ConvertToCurrencies,UpdateSourceTrigger=PropertyChanged}" 
                               SelectedItem="{Binding ConvertToCurrency,UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>

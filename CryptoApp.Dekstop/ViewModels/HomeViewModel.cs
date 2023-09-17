@@ -27,7 +27,6 @@ namespace CryptoApp.Dekstop.ViewModels
             Initialize();
             LoadingScreen = Visibility.Hidden;
         }
-
         private bool CanClearSearchText() => !string.IsNullOrWhiteSpace(SearchText);
         private void ClearSearchText()
         {

@@ -18,6 +18,7 @@
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
 
+        <!--Loading Animation-->
         <Grid Visibility="{Binding LoadingScreen,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="5" Grid.RowSpan="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -84,7 +85,7 @@
         <!--Coin Search-->
         <Grid Grid.Row="0" Grid.Column="0" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -102,9 +103,9 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.ColumnSpan="2" FontSize="15"  Foreground="{DynamicResource Text}">Enter coin Id</Label>
-                <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <Button Grid.Row="1" Grid.Column="1" Command="{Binding ClearSearchTextCommand}" Background="YellowGreen">Clear</Button>
+                <Label Grid.Row="0" Grid.ColumnSpan="2" FontSize="20"  Foreground="{DynamicResource Text}">Enter coin Id:</Label>
+                <TextBox FontSize="20" Grid.Row="1" Grid.Column="0" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <Button Grid.Row="1" Grid.Column="1" Command="{Binding ClearSearchTextCommand}" Background="{DynamicResource Button}">Clear</Button>
             </Grid>
         </Grid>
         
@@ -128,26 +129,27 @@
                                                     <Border BorderThickness="1px" BorderBrush="{DynamicResource Text}" CornerRadius="5 5 5 5">
                                                         <Grid>
                                                             <Grid.RowDefinitions>
-                                                                <RowDefinition Height="*"></RowDefinition>
-                                                                <RowDefinition Height="*"></RowDefinition>
+                                                                <RowDefinition Height="2*"></RowDefinition>
+                                                                <RowDefinition Height="auto"></RowDefinition>
+                                                                <RowDefinition Height="auto"></RowDefinition>
                                                                 <RowDefinition Height="*"></RowDefinition>
                                                             </Grid.RowDefinitions>
-                                                            <TextBlock Grid.Row="0" Foreground="{DynamicResource Text}" Text="{Binding Name}" FontSize="15" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                                                            <TextBlock Grid.Row="0" Foreground="{DynamicResource Text}" Text="{Binding Name}" FontSize="20" TextWrapping="Wrap" HorizontalAlignment="Center"/>
                                                             <Grid Grid.Row="1">
                                                                 <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                    <ColumnDefinition Width="auto"/>
                                                                 </Grid.ColumnDefinitions>
-                                                                <Label Grid.Column="0"  Foreground="{DynamicResource Text}">Id:</Label>
-                                                                <TextBlock Grid.Column="1" Foreground="{DynamicResource Text}" Grid.Row="1" Text="{Binding Id}" FontSize="15" TextWrapping="Wrap" />
+                                                                <TextBlock Grid.Column="0"  Foreground="{DynamicResource Text}" FontSize="15" TextWrapping="Wrap">Id:</TextBlock>
+                                                                <TextBlock Grid.Column="1" Foreground="{DynamicResource Text}"  Text="{Binding Id}" FontSize="15" TextWrapping="Wrap" />
                                                             </Grid>
                                                             <Grid Grid.Row="2">
                                                                 <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                    <ColumnDefinition Width="auto"/>
                                                                 </Grid.ColumnDefinitions>
-                                                                <Label Grid.Column="0"  Foreground="{DynamicResource Text}">Symbol:</Label>
-                                                                <TextBlock Grid.Column="1" Foreground="{DynamicResource Text}" Grid.Row="2" Text="{Binding Symbol}" FontSize="15" TextWrapping="Wrap"/>
+                                                                <TextBlock Grid.Column="0"  Foreground="{DynamicResource Text}" FontSize="15" TextWrapping="Wrap">Symbol:</TextBlock>
+                                                                <TextBlock Grid.Column="1" Foreground="{DynamicResource Text}" Text="{Binding Symbol}" FontSize="15" TextWrapping="Wrap"/>
                                                             </Grid>
                                                         </Grid>
                                                     </Border>

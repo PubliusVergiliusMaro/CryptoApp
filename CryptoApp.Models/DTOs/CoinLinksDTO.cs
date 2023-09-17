@@ -6,5 +6,6 @@ namespace CryptoApp.Models.DTOs
     {
         [JsonProperty("homepage")]
         public List<string> Homepages { get; set; }
+        public string? Homepage => Homepages.FirstOrDefault();
     }
 }
