@@ -9,6 +9,7 @@ namespace CryptoApp.Models.DTOs
         public string Name { get; set; }
 
         // CoinCap
+        #region CoinCap props
         public int? Rank { get; set; }
         public decimal? Supply { get; set; }
         public decimal? MarketCapUsd { get; set; }
@@ -16,8 +17,10 @@ namespace CryptoApp.Models.DTOs
         public decimal? PriceUsd { get; set; }
         public decimal? ChangePercent24Hr { get; set; }
         public decimal? vwap24Hr { get; set; }
+        #endregion
 
         // CoinGecko
+        #region CoinGecko props
         [JsonProperty("links")]
         public CoinLinksDTO? Links { get; set; }
         [JsonProperty("image")]
@@ -28,5 +31,6 @@ namespace CryptoApp.Models.DTOs
         public decimal? MaxSupply { get; set; }
         [JsonProperty("market_data")]
         public MarketDataDTO? MarketData { get; set; }
+        #endregion
     }
 }

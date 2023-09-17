@@ -7,11 +7,12 @@
         xmlns:vs ="clr-namespace:CryptoApp.Dekstop.Views.Pages"
         xmlns:vms ="clr-namespace:CryptoApp.Dekstop.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="Crypto App" 
         MaxWidth="1480" MaxHeight="800"
         MinWidth="760" MinHeight="600"
         Width="1236" Height="768"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -29,10 +30,11 @@
             <Grid.ColumnDefinitions>
                 
             </Grid.ColumnDefinitions>
+            <!--Program Name-->
             <Grid Grid.Row="0" Background="Transparent">
                 <TextBlock Foreground="White" Text="C R Y P T O  A P P" FontFamily="Neue Aachen" Margin="5 0 0 0" TextWrapping="Wrap"/>
             </Grid>
-
+            <!--Nav Menu-->
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -49,6 +51,7 @@
                 <Image Grid.Row="1" Source="/Icons/converter.png"/>
                 <Button Grid.Row="1" Grid.Column="1" Background="{Binding ConverterColor}" Command="{Binding SelectConverterCommand}">Converter</Button>
             </Grid>
+            <!--Change Theme Button-->
             <Grid Grid.Row="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
@@ -60,7 +63,7 @@
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Grid.Row="1" Content="Change Theme" Command="{Binding ChangeThemeCommand}"></Button>
+                <Button Grid.Column="1" Grid.Row="1" Content="Change Theme" Background="{DynamicResource Button}" Command="{Binding ChangeThemeCommand}"></Button>
             </Grid>
               
         </Grid>

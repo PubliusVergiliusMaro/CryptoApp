@@ -18,6 +18,69 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <!--Loading Animation-->
+        <Grid Visibility="{Binding LoadingScreen,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="5" Grid.RowSpan="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Canvas Grid.Row="0"  x:Name="LoadingAnimation" Width="40" Height="40">
+                <Ellipse x:Name="Spinner1" Width="60" Height="60" Fill="Blue">
+                    <Ellipse.RenderTransform>
+                        <RotateTransform x:Name="Rotation1" CenterX="20" CenterY="20" />
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Canvas.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                            Storyboard.TargetName="Rotation1"
+                            Storyboard.TargetProperty="Angle"
+                            From="0" To="360" Duration="0:0:1"
+                            RepeatBehavior="Forever"
+                        />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Canvas.Triggers>
+            </Canvas>
+            <Canvas Grid.Row="0" Width="40" Height="40">
+                <Ellipse x:Name="Spinner2" Width="40" Height="50" Fill="Yellow">
+                    <Ellipse.RenderTransform>
+                        <RotateTransform x:Name="Rotation2" CenterX="14" CenterY="10" />
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Canvas.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                            Storyboard.TargetName="Rotation2"
+                            Storyboard.TargetProperty="Angle"
+                            From="0" To="360" Duration="0:0:1"
+                            RepeatBehavior="Forever"
+                        />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Canvas.Triggers>
+            </Canvas>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.4*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="1" Grid.Column="1" FontSize="30">Loading...</TextBlock>
+            </Grid>
+        </Grid>
         <Grid Grid.Row="1" Grid.Column="1" Background="{DynamicResource Backdrop}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
@@ -124,6 +187,10 @@
                               SelectedItem="{Binding ConvertToCurrency,UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
             </Grid>
+        </Grid>
+        <!--Footer-->
+        <Grid Grid.Row="2" Grid.ColumnSpan="3" Background="#2E333A" Margin="-1">
+
         </Grid>
     </Grid>
 </UserControl>

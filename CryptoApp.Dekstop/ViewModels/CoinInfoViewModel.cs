@@ -11,6 +11,9 @@ using System.Windows.Media;
 
 namespace CryptoApp.Dekstop.ViewModels
 {
+    /// <summary>
+    /// ViewModel for CoinInfoView that displays info about coin
+    /// </summary>
     public class CoinInfoViewModel : ViewModelBase
     {
         public CoinInfoViewModel(NavigationService navigationStore,ICoinGeckoService coinGeckoService,CoinDTO coin)
@@ -31,18 +34,6 @@ namespace CryptoApp.Dekstop.ViewModels
             HomeCommand = new DelegateCommand(GoHome);
             OpenBrowserCommand = new DelegateCommand(OpenBrowser,CanOpenBrowser);
         }
-
-        private bool CanOpenBrowser() => !string.IsNullOrWhiteSpace(HomePage);
-
-        private void OpenBrowser()
-        {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = HomePage,
-                UseShellExecute = true
-            }) ;
-        }
-
         private CoinViewModel _coin;
         public CoinViewModel Coin
         {
@@ -63,19 +54,25 @@ namespace CryptoApp.Dekstop.ViewModels
         public string HomePage { get; set; }
         public string CurrentPrice { get; set; }
         public string TotalVolume { get; set; }
-
+        /// <summary>
+        /// The command responsible for returning to the HomeView.
+        /// </summary>
+        public ICommand HomeCommand { get; }
+        /// <summary>
+        /// The command responsible for opening the link to the coin in the browser.
+        /// </summary>
+        public ICommand OpenBrowserCommand { get; }
         private NavigationService _navigationStore;
         private ICoinGeckoService _coinGeckoService;
-        public ICommand HomeCommand { get; }
-        public ICommand OpenBrowserCommand { get; }
-        //private async Task GetCoin(string id)
-        //{
-        //    var coin = await _coinGeckoService.GetCoinByIdAsync(id);
-        //    Coin = new CoinViewModel(coin);
-        //} 
-        private void GoHome()
+        private void GoHome() =>  _navigationStore.NavigateTo<HomeViewModel>(); 
+        private void OpenBrowser()
         {
-            _navigationStore.NavigateTo<HomeViewModel>(); 
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = HomePage,
+                UseShellExecute = true
+            });
         }
+        private bool CanOpenBrowser() => !string.IsNullOrWhiteSpace(HomePage);
     }
 }

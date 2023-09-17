@@ -7,6 +7,9 @@ using System.Windows.Input;
 
 namespace CryptoApp.Dekstop.ViewModels
 {
+    /// <summary>
+    /// ViewModel for one button with onew coin info
+    /// </summary>
     public class CoinBoxViewModel : ViewModelBase
     {
         public CoinBoxViewModel(NavigationService navigationStore, ICoinGeckoService coinGeckoService, CoinDTO coin)
@@ -50,6 +53,9 @@ namespace CryptoApp.Dekstop.ViewModels
         }
         private readonly NavigationService _navigationStore;
         private readonly ICoinGeckoService _coinGeckoService;
+        /// <summary>
+        /// The command that is invoked when clicking on a coin block. 
+        /// </summary>
         public ICommand SelectCoinCommand { get; }
         private async void SelectCoin()
         {

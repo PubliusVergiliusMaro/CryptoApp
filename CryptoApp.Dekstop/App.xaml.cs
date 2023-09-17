@@ -24,7 +24,7 @@ namespace CryptoApp.Dekstop
                 // Display a message box with the error message.
                 MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             };
-            HomeViewModel homeView = new HomeViewModel(navigation,coinGeckoService,coinCapService);
+            HomeViewModel homeView = new HomeViewModel(navigation,coinGeckoService);
             navigation.CurrentViewModel = homeView;
             
             services.AddSingleton<ICoinGeckoService>(coinGeckoService);

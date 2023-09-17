@@ -5,16 +5,6 @@
              xmlns:vs="clr-namespace:CryptoApp.Dekstop.Views.Pages"
              xmlns:local="clr-namespace:CryptoApp.Dekstop">
     <Application.Resources>
-        <DataTemplate DataType="{x:Type vms:HomeViewModel}">
-            <vs:HomeView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vms:ConverterViewModel}">
-            <vs:ConverterView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vms:CoinInfoViewModel}">
-            <vs:CoinInfoView/>
-        </DataTemplate>
-
-        <ResourceDictionary x:Key="light" Source="/Themes/LightTheme.xaml"/>
+       
     </Application.Resources>
 </Application>

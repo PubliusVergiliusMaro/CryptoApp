@@ -8,6 +8,9 @@ using System.Windows.Media.Imaging;
 
 namespace CryptoApp.Dekstop.ViewModels
 {
+    /// <summary>
+    /// ViewModel responsible for presenting CoinDTO in a convenient format. 
+    /// </summary>
     public class CoinViewModel : ViewModelBase
     {
         public CoinViewModel(CoinDTO coin)
@@ -39,7 +42,11 @@ namespace CryptoApp.Dekstop.ViewModels
         public Dictionary<string, decimal?>? PriceCapChange => _coin.MarketData.PriceCapChange;
         public DateTime? LastUpdated => _coin.MarketData.LastUpdated;
         private readonly CoinDTO _coin;
-
+        /// <summary>
+        /// Responsible for getting image from url and returning in ImageSource format
+        /// </summary>
+        /// <param name="imageUrl">url of image</param>
+        /// <returns>Image in ImageSource format</returns>
         private ImageSource GetImage(string imageUrl)
         {
             using (WebClient wc = new WebClient())

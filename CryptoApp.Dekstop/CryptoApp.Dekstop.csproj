@@ -5,11 +5,16 @@
     <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Icons\Icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Icons\coins.png" />
     <None Remove="Icons\converter.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Icons\Icon.ico" />
   </ItemGroup>
 
   <ItemGroup>

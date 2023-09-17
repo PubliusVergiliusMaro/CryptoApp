@@ -7,18 +7,20 @@ namespace CryptoApp.Services.CoinCapServices
     public class CoinCapService : ICoinCapService
     {
         public event EventHandler<string> ErrorOccurred;
+        /// <summary>
+        /// Get all coins from CoinCap
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<CoinDTO>> GetAllCoinsAsync()
         {
-            try
-            {
-                var response = await GetDataFromEndPoint(EndPoints.COINS_COINCAP);
-                return JsonConvert.DeserializeObject<CoinListDTO>(response).CoinList;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            var response = await GetDataFromEndPoint(EndPoints.COINS_COINCAP);
+            return JsonConvert.DeserializeObject<CoinListDTO>(response).CoinList;
         }
+        /// <summary>
+        /// Get coin by Id from CoinCap 
+        /// </summary>
+        /// <param name="coinId"></param>
+        /// <returns></returns>
         public async Task<CoinDTO> GetCoinByIdAsync(string coinId)
         {
             var response = await GetDataFromEndPoint(EndPoints.COIN_COINCAP + coinId);

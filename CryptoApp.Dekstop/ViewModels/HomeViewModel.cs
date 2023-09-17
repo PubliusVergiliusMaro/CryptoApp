@@ -14,27 +14,21 @@ using System.Windows.Input;
 
 namespace CryptoApp.Dekstop.ViewModels
 {
+    /// <summary>
+    /// ViewModel responsible for the HomeView
+    /// </summary>
     public class HomeViewModel : ViewModelBase
     {
-        public HomeViewModel(NavigationService navigationStore, ICoinGeckoService coinGeckoService, ICoinCapService coinCapService)
+        public HomeViewModel(NavigationService navigationStore, ICoinGeckoService coinGeckoService)
         {
             LoadingScreen = Visibility.Visible;
             _coinGeckoService = coinGeckoService;
-            _coinCapService = coinCapService; 
             _navigationStore = navigationStore;
             Coins = new ObservableCollection<CoinBoxViewModel>();
             ClearSearchTextCommand = new DelegateCommand(ClearSearchText, CanClearSearchText);
             Initialize();
-            LoadingScreen = Visibility.Hidden;
         }
-        private bool CanClearSearchText() => !string.IsNullOrWhiteSpace(SearchText);
-        private void ClearSearchText()
-        {
-            SearchText = string.Empty;
-        }
-
         private readonly ICoinGeckoService _coinGeckoService;
-        private readonly ICoinCapService _coinCapService;
         private readonly NavigationService _navigationStore;
         public ObservableCollection<CoinBoxViewModel> Coins { get; set; }
         private IList<CoinDTO> _allCoins { get; set; }
@@ -59,6 +53,9 @@ namespace CryptoApp.Dekstop.ViewModels
                 OnPropertyChanged(nameof(LoadingScreen));
             }
         }
+        /// <summary>
+        /// Responsible for clearing text in Search TextBox
+        /// </summary>
         public ICommand ClearSearchTextCommand { get; }
       
         private List<CoinDTO> tempCoins = new List<CoinDTO>();
@@ -66,22 +63,24 @@ namespace CryptoApp.Dekstop.ViewModels
         {
             List<CoinDTO> coins = await _coinGeckoService.GetAllCoinsAsync();
             _allCoins = new List<CoinDTO>();
+            
             for (int i = 0; i < 250; i++)
-            {
                 _allCoins.Add(coins[i]);
-            }
-            //_allCoins = await _coinCapService.GetAllCoinsAsync();
+
             foreach (CoinDTO coin in _allCoins)
                 tempCoins.Add(coin);
+            
             SortCoins("");
+            LoadingScreen = Visibility.Hidden;
         }
         private async Task SortCoins(string keyword)
         {
             Coins.Clear();
-            
             var temCoins = tempCoins.Where(c=>c.Name.ToLower().Contains(keyword.ToLower()));
             foreach(var coin in temCoins)
-            Coins.Add(new CoinBoxViewModel(_navigationStore,_coinGeckoService, coin));
+                Coins.Add(new CoinBoxViewModel(_navigationStore,_coinGeckoService, coin));
         }
+        private void ClearSearchText() => SearchText = string.Empty;
+        private bool CanClearSearchText() => !string.IsNullOrWhiteSpace(SearchText);
     }
 }

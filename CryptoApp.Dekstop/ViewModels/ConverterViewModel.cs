@@ -10,19 +10,20 @@ using System.Windows.Media;
 
 namespace CryptoApp.Dekstop.ViewModels
 {
+    /// <summary>
+    /// ViewModel responsible for the operation of the converter
+    /// </summary>
     public class ConverterViewModel : ViewModelBase
     {
-        public ConverterViewModel(ICoinGeckoService coinGeckoService, ICoinCapService coinCapService)
+        public ConverterViewModel(ICoinCapService coinCapService)
         {
-            //_coinGeckoService = coinGeckoService;
+            LoadingScreen = Visibility.Visible;
             _coinCapService = coinCapService;
             ConvertFromCurrencies = new ObservableCollection<string>();
             ConvertToCurrencies = new ObservableCollection<string>();
             _allCoins = new List<CoinDTO>();
             Initialize();
         }
-        //private readonly ICoinGeckoService _coinGeckoService;
-        private readonly ICoinCapService _coinCapService;
         private string _coinText;
         public string CoinText
         {
@@ -64,9 +65,19 @@ namespace CryptoApp.Dekstop.ViewModels
                 OnPropertyChanged(nameof(CoinChangeColor));
             }
         }
+        private Visibility _loadingScreen;
+        public Visibility LoadingScreen
+        {
+            get => _loadingScreen;
+            set
+            {
+                _loadingScreen = value;
+                OnPropertyChanged(nameof(LoadingScreen));
+            }
+        }
         //Convert FROM
         private CoinDTO _coinFrom;
-        // Number
+        // Value
         private decimal _convertFromNumber;
         public decimal ConvertFromNumber
         {
@@ -80,7 +91,7 @@ namespace CryptoApp.Dekstop.ViewModels
         }
         // Currencies
         public ObservableCollection<string> ConvertFromCurrencies { get; set; }
-        // Selected Currency
+        // Selected currency that we will convert
         private string _convertFromCurrency;
         public string ConvertFromCurrency
         {
@@ -107,7 +118,7 @@ namespace CryptoApp.Dekstop.ViewModels
                 OnPropertyChanged(nameof(ConvertToNumber));
             }
         }
-        // Currencies
+        // Currencie
         public ObservableCollection<string> ConvertToCurrencies { get; set; }
         // Currency
         private string _convertToCurrency;
@@ -121,53 +132,46 @@ namespace CryptoApp.Dekstop.ViewModels
                 OnPropertyChanged(nameof(ConvertToCurrency));
             }
         }
-
-        // Default selected currencies
-        private string _defaultFromCoin = "bitcoin";//"01coin";
-        private string _defaultToCoin = "ethereum";//"0chain";
-        // All Currencies
+        /// <summary>
+        /// All Currencies
+        /// </summary>
         private static List<CoinDTO> _allCoins;
-
-        // Update Result
-        private async Task UpdateConvertedValue()
-        {
-            decimal? coinFromUsd = _coinFrom.PriceUsd;//_coinFrom.MarketData.CurrentPrice["usd"];
-            decimal? coinToUsd = _coinTo.PriceUsd;//_coinTo.MarketData.CurrentPrice["usd"];
-            ConvertToNumber = ConvertFromNumber * (coinFromUsd/coinToUsd);
-        }
+        private readonly ICoinCapService _coinCapService;
+        /// <summary>
+        /// Update convertation result
+        /// </summary>
+        /// <returns></returns>
+        private async Task UpdateConvertedValue() => ConvertToNumber = ConvertFromNumber * (_coinFrom.PriceUsd/_coinTo.PriceUsd);
+        /// <summary>
+        /// Update Info about coin that we want to convert
+        /// </summary>
+        /// <param name="Name">Name of coin</param>
+        /// <returns></returns>
         private async Task UpdateCoinFrom(string Name)
         {
-            var coin = _allCoins.Where(c => c.Name == Name).FirstOrDefault();
-            if (coin == null)
-            {
-                MessageBox.Show("Error");
-                return;
-            }
-            _coinFrom = await _coinCapService.GetCoinByIdAsync(coin.Id);//await _coinGeckoService.GetCoinByIdAsync(coin.Id);
+            _coinFrom = await GetCoinByName(Name);
             UpdateBasicInfo();
             UpdateConvertedValue();
         }
         private async Task UpdateCoinTo(string Name)
         {
+            _coinTo = await GetCoinByName(Name);
+            UpdateConvertedValue();
+        }
+        private async Task<CoinDTO> GetCoinByName(string Name)
+        {
             var coin = _allCoins.Where(c => c.Name == Name).FirstOrDefault();
             if (coin == null)
             {
-                MessageBox.Show("Error");
-                return;
+                MessageBox.Show("Didn`t find such coin");
+                return null;
             }
-            _coinTo = await _coinCapService.GetCoinByIdAsync(coin.Id);//await _coinGeckoService.GetCoinByIdAsync(coin.Id);
-            UpdateConvertedValue();
+            var tempCoin = await _coinCapService.GetCoinByIdAsync(coin.Id);
+            return tempCoin;
         }
-
         private async Task Initialize()
         {
-            // List<CoinDTO> coins = await _coinGeckoService.GetAllCoinsAsync();
             _allCoins = await _coinCapService.GetAllCoinsAsync();//new List<CoinDTO>();
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    _allCoins.Add(coins[i]);
-            //}
-            //_allCoins = await _coinCapService.GetAllCoinsAsync();
             _coinFrom = await _coinCapService.GetCoinByIdAsync("bitcoin");
             _coinTo = await _coinCapService.GetCoinByIdAsync("ethereum");
 
@@ -180,6 +184,7 @@ namespace CryptoApp.Dekstop.ViewModels
             ConvertFromCurrency = _coinFrom.Name;
             ConvertToCurrency = _coinTo.Name;
             UpdateBasicInfo();
+            LoadingScreen = Visibility.Hidden;
         }
         private void UpdateBasicInfo()
         {
